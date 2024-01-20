@@ -8,7 +8,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     float rotSpeed;
-    public static PlayerMovement instance;
+    public GameObject rightHand;
+    static PlayerMovement s_instance;
+    public static PlayerMovement Instance { get { return s_instance; } }
     public float moveSpeed;
     public float jumpForce;
     public float runSpeed;
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(this);
         }
 
-        InitValuable(5, 180, 0.1f, 7);
+        InitValuable(5, 180, 0.2f, 7);
     }
     private void Start()
     {
@@ -69,14 +71,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private void Rotate() 
+    private void Rotate() // Slerp, Lerp도 사용가능하지만 그러려면 move시에도 LookRotation해줘야함.
     {
         float turn = characterInput.rotate * rotSpeed * Time.deltaTime;
         characterRigidbody.rotation = characterRigidbody.rotation * Quaternion.Euler(0f, turn, 0f);
     }
     private void Jump()
     {
-        if(characterInput.jump && isGround == true)
+        if(characterInput.jump && isGround)
         {
             playerState = PlayerState.JUMP;
             // isJumping = true;
@@ -87,12 +89,6 @@ public class PlayerMovement : MonoBehaviour
         if(other.gameObject.tag == "Ground") {
             // isJumping = false;
             isGround = true;
-        }
-    }
-    private void PickUpItem() {
-        if(characterInput.pickUp)
-        {
-            playerState = PlayerState.PICKUP;
         }
     }
 }

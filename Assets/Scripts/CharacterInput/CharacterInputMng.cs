@@ -32,7 +32,7 @@ public class CharacterInputMng : MonoBehaviour
     }
     private void Update() 
     {
-        if(GameManager.instance != null && (GameManager.instance.currentGameState == GameState.ISGAMEOVER))
+        if(GameManager.GetInstance() != null && (GameManager.GetInstance().currentGameState == GameState.ISGAMEOVER))
         {
             move = 0;
             rotate = 0;
