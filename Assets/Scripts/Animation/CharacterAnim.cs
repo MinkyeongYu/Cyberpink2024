@@ -49,6 +49,7 @@ public class CharacterAnim : MonoBehaviour
         case 3:
             Debug.Log("Jump");
             pm.characterRigidbody.AddForce(Vector3.up * pm.jumpForce, ForceMode.Impulse);
+            pm.characterAnimator.SetBool("Jump", true);
             break;
         case 4:
             Debug.Log("Pickup");

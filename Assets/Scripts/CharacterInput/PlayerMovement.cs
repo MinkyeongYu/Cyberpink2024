@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if(other.gameObject.tag == "Ground") {
             // isJumping = false;
             isGround = true;
+            characterAnimator.SetBool("Jump", false);
         }
     }
 }
